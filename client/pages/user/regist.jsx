@@ -10,7 +10,7 @@ const Regist = () => {
     e.preventDefault()
     
     const response =  await axios.post('http://localhost:4000/user/regist',userData)
-    if(response.data){
+    if(response.data.regist){
       alert('회원가입 완료')
       Router.push('/user/login')
     } else {
