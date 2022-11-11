@@ -46,7 +46,7 @@ const login = async (req,res) => {
     const hash = generateHash(userId, pw);
     const deployed = await getDeplyed();
     const address = process.env.ADDRESS;
-    const isRegistered = await deployed.contract.methods.isRegistered(hash).call({from:address})
+    const isRegistered = await deployed.contract.methods.isRegistered(hash).call({ from:address })
     try{
 
         const sql = `SELECT * FROM user WHERE userId='${userId}'`
