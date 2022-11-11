@@ -50,10 +50,10 @@ const MyProfile = () => {
     const rejoinCheckSubmit = async (e) => {
         e.preventDefault();
         try{
-            const response = await axios.post('http://localhost:4000/user/pwCheck',{userPw,cookies})
+            const response = await axios.post('http://localhost:4000/user/pwCheck', { userPw, cookies })
             if(response.data.pwCheck){
                 setRejoinPwCheck(true)
-                const withdrawUser = await axios.post('http://localhost:4000/user/withdrawUser',{hash:response.data.hash})
+                const withdrawUser = await axios.post('http://localhost:4000/user/withdrawUser',{ hash:response.data.hash, userData })
                 if(withdrawUser.data.withdraw){
                     alert('재등록을 진행합니다.')
                     removeCookie("Han_DID")
@@ -81,7 +81,7 @@ const MyProfile = () => {
             const response = await axios.post('http://localhost:4000/user/pwCheck',{userPw,cookies})
             if(response.data.pwCheck){
                 setRejoinPwCheck(true)
-                const withdrawUser = await axios.post('http://localhost:4000/user/withdrawUser',{hash:response.data.hash})
+                const withdrawUser = await axios.post('http://localhost:4000/user/withdrawUser', { hash:response.data.hash, userData })
                 if(withdrawUser.data.withdraw){
                     alert('회원탈퇴 되었어요....어디가세요')
                     removeCookie("Han_DID")
@@ -123,11 +123,11 @@ const MyProfile = () => {
                 <div>
                     마이프로필
                 </div>
-                아이디 : <input type='text' value={infoPwCheck ? userInfo.id : '' }/>
+                아이디 : <input type='text' readOnly value={infoPwCheck ? userInfo.id || '' : '' }/>
                 <br />
-                이름 : <input type='text' value={infoPwCheck ? userInfo.name : '' } />
+                이름 : <input type='text' readOnly value={infoPwCheck ? userInfo.name || '' : '' } />
                 <br />
-                나이 : <input type='text' value={infoPwCheck ? userInfo.age : '' } />
+                나이 : <input type='text' readOnly value={infoPwCheck ? userInfo.age || '' : '' } />
                 <br />
                 <button onClick={rejoinHandle}>재등록</button>
                 <br />
