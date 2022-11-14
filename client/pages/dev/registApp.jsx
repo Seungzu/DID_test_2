@@ -27,8 +27,18 @@ const RegistApp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await axios.post('http://localhost:4000/dev/addApp', appInfo)
-        console.log(response.data)
+        try {
+            const response = await axios.post('http://localhost:4000/dev/addApp', appInfo)
+            const { addApp }  = response.data
+            if(addApp){
+                alert('앱 등록이 완료되었습니다.')
+                Router.push('/dev/appList')
+            } else {
+                alert('앱 등록이 실패했습니다.')
+            }
+        } catch(e){
+            console.log(e)
+        }
     }
 
     useEffect(()=>{
