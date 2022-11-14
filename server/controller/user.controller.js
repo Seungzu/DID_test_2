@@ -154,4 +154,26 @@ const withdrawUser = async (req,res) => {
     }
 }
 
-module.exports = { regist, login, checkToken, PwCheck, getUserInfo, withdrawUser }
+const viewAppList = async (req,res) => {
+    const { idx : u_idx } = req.body
+
+    const sql = `SELECT application.idx, name, description, imgUrl
+                    FROM connected
+                    JOIN application
+                    ON connected.a_idx = application.idx
+                    LEFT JOIN appDesc
+                    ON connected.a_idx=appDesc.a_idx
+                    LEFT JOIN appImg
+                    ON connected.a_idx=appImg.a_idx
+                    WHERE connected.u_idx=${u_idx};
+                `
+    const [result] = await pool.execute(sql)
+
+    res.json({ result })
+
+}
+
+module.exports = {
+    regist, login, checkToken, PwCheck,
+    getUserInfo, withdrawUser, viewAppList
+}
