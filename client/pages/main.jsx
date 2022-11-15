@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import Router from 'next/router';
 import { Global } from './_app';
+import { StyledMain } from '../styles/main';
 
 const Main = () => {
 
@@ -27,12 +28,14 @@ const Main = () => {
 
     return (
         <>
-            <div onClick={user}>
-                user
-            </div>
-            <div onClick={dev}>
-                dev
-            </div>
+            <StyledMain>
+                <div className='menu' onClick={user}>
+                    user
+                </div>
+                <div className='menu' onClick={dev}>
+                    dev
+                </div>
+            </StyledMain>
         </>
     )
 }

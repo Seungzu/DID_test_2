@@ -3,6 +3,7 @@ import Router from 'next/router'
 import Link from 'next/link'
 import { Global } from '../pages/_app';
 import { useCookies } from 'react-cookie'
+import { StyledHeader, Nav } from '../styles/header';
 
 const Header = () => {
 
@@ -28,28 +29,26 @@ const Header = () => {
     }
 
     return (
-        <div>
-            <div>Header layout</div>
+        <StyledHeader>
             <Link href='/'>Logo</Link>
             <br/>
             {isLogin ? (
-                <>
+                <Nav>
                     <Link href='/user/myProfile'>프로필보기</Link>
-                    <br/>
-                    <span onClick={logout}>로그아웃</span>
-                </>
+                    <div onClick={logout}>로그아웃</div>
+                </Nav>
             ) : (
-                <>
+                <Nav>
                     <Link href='/user/login'>login</Link>
                     <br/>
                     <Link href="/user/regist">regist</Link>
                     <br/>
-                </>
+                </Nav>
             )}
             
             
             
-        </div>
+        </StyledHeader>
     )
 }
 

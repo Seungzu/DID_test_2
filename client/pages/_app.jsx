@@ -2,6 +2,7 @@ import Header from '../components/header'
 import { useState, useEffect, createContext } from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios';
+import { StyledGlobal } from '../styles/global';
 
 
 export const Global = createContext({});
@@ -47,13 +48,15 @@ function MyApp({ Component, pageProps }) {
   },[])
 
 
-  return (
-    <>
-      <Global.Provider value={globalstate}>
-        <Header />
-        <Component {...pageProps} />
-      </Global.Provider>
-    </>
+    return (
+      <>
+        <StyledGlobal>
+          <Global.Provider value={globalstate}>
+            <Header />
+            <Component {...pageProps} />
+          </Global.Provider>
+        </StyledGlobal>
+      </>
     )
 }
 

@@ -3,6 +3,7 @@ import Router from 'next/router'
 import { Global } from '../_app';
 import { useCookies } from 'react-cookie'
 import axios from 'axios';
+import { StyledAppList, StyledAppBox, StyledAddApp } from '../../styles/appList';
 
 const ConnectedApp = () => {
 
@@ -17,23 +18,24 @@ const ConnectedApp = () => {
         setUserData,
     } = useContext(Global)
 
-
-
+    const handleClick = (host) => {
+        window.open(`${host}`)
+    }
 
     const viewApp = () => {
         return (
-            <div>
+            <StyledAppList>
                 {appList.map((v,k)=>{
                     return (
-                        <ul key={k} >
-                            <span>앱 이름</span><li>{v.name}</li>
-                            <span>앱 설명</span><li>{v.description}</li>
-                            <span>앱 이미지</span><li>{v.imgUrl}</li>
+                        <StyledAppBox onClick={()=>{handleClick(v.host)}} key={k} >
+                            <li className='img'>{v.imgUrl}</li>
+                            <li className='name'>{v.name}</li>
+                            <li className='desc'>{v.description}</li>
                             <br />
-                        </ul>
+                        </StyledAppBox>
                     )
                 })}
-            </div>
+            </StyledAppList>
         )
     }
 

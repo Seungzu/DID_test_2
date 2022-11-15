@@ -32,10 +32,6 @@ const AppInfo = () => {
             alert('앱 삭제 실패')
             Router.push('/dev/appInfo')
         }
-
-
-
-
     }
 
     useEffect(()=>{
