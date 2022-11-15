@@ -4,6 +4,7 @@ import { Global } from '../_app';
 import { useCookies } from 'react-cookie'
 import Modal from '../../components/Modal';
 import axios from 'axios';
+import { StyledAppList, StyledAppBox, StyledAddApp } from '../../styles/appList';
 
 const AppList = () => {
 
@@ -20,20 +21,21 @@ const AppList = () => {
 
     const viewApp = () => {
         return (
-            <div>
+            <StyledAppList>
                 {appList.map((v,k)=>{
                     return (
-                        <ul onClick={()=>{viewAppInfo(v.APIKey)}} key={k}>
-                            <span>앱 이름</span><li>{v.name}</li>
+                        <StyledAppBox onClick={()=>{viewAppInfo(v.APIKey)}} key={k}>
+                            <li className='img'>{v.imgUrl == null ? '이미지가 없습니다.' : v.imgUrl}</li>
+                            <li className='name'>{v.name}</li>
+                            <li className='desc'>{v.description == null ? '앱 설명이 없습니다.' : v.description}</li>
                             <br />
-                            <span>앱 사진</span><li>{v.imgUrl == null ? '이미지가 없습니다.' : v.imgUrl}</li>
-                            <br />
-                            <span>앱 설명</span><li>{v.description == null ? '앱 설명이 없습니다.' : v.description}</li>
-                            <br />
-                        </ul>
+                        </StyledAppBox>
                     )
                 })}
-            </div>
+                <StyledAddApp onClick={addAppHandle}>
+                    App 추가하기
+                </StyledAddApp>
+            </StyledAppList>
         )
     }
 
@@ -61,7 +63,7 @@ const AppList = () => {
     return (
             <div>
                 {viewApp()}
-                <div onClick={addAppHandle}>App 추가하기</div>
+                
             </div>
     )
 }

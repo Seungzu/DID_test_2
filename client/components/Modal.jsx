@@ -1,25 +1,11 @@
 import { useState, useEffect, useContext } from 'react'
-import Router from 'next/router'
-import { Global } from '../pages/_app'
-import axios from 'axios';
-import { useCookies } from 'react-cookie'
+import { StyledModal } from '../styles/modal';
 
 const Modal = ({modal}) => {
 
     const [ modalSwitch, setModalSwitch ] = useState('block')
     const [ pwMsg, setPwMsg ] = useState('비밀번호를 입력해주세요')
 
-    const [ cookies, setCookie, removeCookie ] = useCookies('');
-
-
-    const {
-        userToken,
-        setUserToken,
-        isLogin,
-        setIsLogin,
-        userData,
-        setUserData,
-    } = useContext(Global)
 
     const pwChangeHandler = (e) => {
         e.preventDefault()
@@ -32,6 +18,7 @@ const Modal = ({modal}) => {
                     position:'absolute',
                     width:'100%',
                     height:'100%',
+                    margin : '0 auto',
                     background : 'rgba(0, 0, 0, 0.4)',
                     top:0,
                     left:0,
@@ -39,19 +26,17 @@ const Modal = ({modal}) => {
             <div style={{
                 margin:'300px 0 0 300px'
             }}>
-                <div>
-                    모달이에요
-                </div>
-                <div>
-                    {pwMsg}
-                </div>
-                <form action="pwCheck" method="post">
-                    <input onChange={pwChangeHandler} type='password' name="pw" />
-                    <input onClick={modal.submit} type='submit' value='확인'/>
-                    <button onClick={modal.cancle} >취소</button>
-                </form>
+                <StyledModal>
+                    <div className='msg'>
+                        {pwMsg}
+                    </div>
+                    <form action="pwCheck" method="post">
+                        <input className='pw' onChange={pwChangeHandler} type='password' name="pw" />
+                        <input className='submit' onClick={modal.submit} type='submit' value='확인'/>
+                        <button className='cancel' onClick={modal.cancle} >취소</button>
+                    </form>
+                </StyledModal>
             </div>
-            
         </div>
     )
 }

@@ -137,16 +137,34 @@ const getUserInfo = async (req,res) => {
 const withdrawUser = async (req,res) => {
     try{
         const { hash, userData } = req.body
+        const u_idx = userData.idx
         const deployed = await getDeplyed();
         const address = process.env.ADDRESS;
 
         const txCount = await deployed.client.web3.eth.getTransactionCount(address);
         await deployed.contract.methods.withdrawUser(hash).send({ nonce: txCount, from: address })
 
-        const sql = `DELETE FROM user WHERE userId='${userData.userId}'`
-        await pool.execute(sql)
+        const deleteUserSql = `DELETE FROM user WHERE userId='${userData.userId}'`
+        await pool.execute(deleteUserSql)
 
         res.json({ withdraw:true })
+
+        // 여기서 만들어야 할것
+        // 회원정보 지우려는 u_idx로 connected에 연결되어있는 app들 삭제.
+        // 이 회원이 만든 application 삭제
+        // 지우려는 application의 appImg, appDesc 삭제
+        
+        // const appIdxSql = ` SELECT idx FROM application WHERE u_idx=${userData.idx} `
+        // const [result] = await pool.execute(appIdxSql)
+        // let a_idx = []
+        // result.forEach(v=>{
+        //     a_idx.push(v.idx)
+        // })
+        // console.log(a_idx)
+        // const deleteConnectedAppSql = `DELETE FROM connected WHERE u_idx=${u_idx} OR  `
+        // const deleteAppSql = ` DELETE FROM application WHERE u_idx=${u_idx} `
+        // const deleteAppImgSql=` DELETE FROM appImg WHERE  `
+
 
     }catch(e){
         console.log(e)
@@ -157,7 +175,7 @@ const withdrawUser = async (req,res) => {
 const viewAppList = async (req,res) => {
     const { idx : u_idx } = req.body
 
-    const sql = `SELECT application.idx, name, description, imgUrl
+    const sql = `SELECT application.idx, name, description, imgUrl, host
                     FROM connected
                     JOIN application
                     ON connected.a_idx = application.idx
