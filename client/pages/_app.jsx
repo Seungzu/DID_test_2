@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }) {
         const response = await axios.post('http://localhost:4000/user/checkToken',{userToken})
         setIsLogin(true);
         setUserData(response.data)
+
       } catch(e){
         console.log(e)
         setIsLogin(false)
@@ -39,6 +40,7 @@ function MyApp({ Component, pageProps }) {
         alert('유효한 토큰이아닙니다 다시로그인하세요')
       }
     })()
+
     
   },[userToken])
 
@@ -46,7 +48,6 @@ function MyApp({ Component, pageProps }) {
     const { Han_DID : token } = cookies
     if (token) setUserToken(token);
   },[])
-
 
     return (
       <>
