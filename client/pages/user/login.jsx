@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import Router from 'next/router';
 import { Global } from '../_app';
+import { StyledLogin } from '../../styles/login';
 
 const Login = () => {
     const [ cookies, setCookie, removeCookie ] = useCookies('');
@@ -48,15 +49,24 @@ const Login = () => {
     },[isLogin])
 
 
+    if(isLogin){
+        alert('이미 로그인되어있습니다.')
+        Router.push('/main')
+    }
+
+
+
     return (
         <>
-            <div>로그인 페이지입니다.</div>
-            <form onSubmit={loginHandler} action='로그인' method='post'>
-                아이디 : <input onChange={setValue} type='text' name='id' />
-                <br />
-                비밀번호 : <input onChange={setValue} type='password' name='pw' />
-                <input type='submit' value='로그인' />
-            </form>
+            <StyledLogin>
+                <div>로그인 페이지입니다.</div>
+                <form onSubmit={loginHandler} action='로그인' method='post'>
+                    아이디 : <input onChange={setValue} type='text' name='id' />
+                    <br />
+                    비밀번호 : <input onChange={setValue} type='password' name='pw' />
+                    <input type='submit' value='로그인' />
+                </form>
+            </StyledLogin>
         </>
     )
 }

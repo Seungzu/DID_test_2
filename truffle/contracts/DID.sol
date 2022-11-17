@@ -26,15 +26,15 @@ contract DID is Ownable, IDID {
 
     
 
-    mapping(uint => character) public characterList;
+    // mapping(uint => character) public characterList;
 
-    function registeredTest(uint _num, string memory _name, string memory _job, uint _level) public override {
-        characterList[_num] = character(_name, _job, _level);
-    }
+    // function registeredTest(uint _num, string memory _name, string memory _job, uint _level) public override {
+    //     characterList[_num] = character(_name, _job, _level);
+    // }
 
-    function showTest(uint _num) view public override returns(character memory){
-        return characterList[_num];
-    }
+    // function showTest(uint _num) view public override returns(character memory){
+    //     return characterList[_num];
+    // }
 
     mapping(string => UserData) private user;
     mapping(string => bool) private isRegisteredUser;

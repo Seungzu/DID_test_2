@@ -9,18 +9,18 @@ abstract contract IDID {
         string userInfo;
     }
 
-    struct character{
-        string _name;
-        string _job;
-        uint _level;
-    }
+    // struct character{
+    //     string _name;
+    //     string _job;
+    //     uint _level;
+    // }
 
     // virtual은 덮어쓸수 있습니다. 의 뜻임.
     // override는 덮어쓴 함수입니다. 의 뜻임.
 
-    function registeredTest(uint _num, string memory _name, string memory _job, uint _level ) virtual external;
+    // function registeredTest(uint _num, string memory _name, string memory _job, uint _level ) virtual external;
 
-    function showTest(uint _num) view public virtual returns(character memory);
+    // function showTest(uint _num) view public virtual returns(character memory);
 
     function registerUser(string memory _identifier, UserData memory _userData) virtual  external;
 
